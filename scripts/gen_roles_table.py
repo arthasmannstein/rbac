@@ -35,12 +35,12 @@ def validate_aggregated_roles(roles_data, atomic_role_names):
         role = item['Агрегированная роль']
         atoms = item['Атомарные роли'].split(", ") if item['Атомарные роли'] else []
         if not atoms:
-            errors.append(f"❌ Роль `{role}` не содержит атомарных ролей.")
+            errors.append(f" Роль `{role}` не содержит атомарных ролей.")
         for atom in atoms:
             if atom not in atomic_role_names:
-                errors.append(f"❌ В роли `{role}` указана несуществующая атомарная роль `{atom}`.")
+                errors.append(f" В роли `{role}` указана несуществующая атомарная роль `{atom}`.")
         if len(atoms) != len(set(atoms)):
-            errors.append(f"❌ В роли `{role}` есть повторяющиеся атомарные роли.")
+            errors.append(f" В роли `{role}` есть повторяющиеся атомарные роли.")
     return errors
 
 def main():
@@ -88,7 +88,7 @@ def main():
     with open(OUTPUT_YAML, "w", encoding="utf-8") as f:
         yaml.dump(yaml_data, f, allow_unicode=True, sort_keys=False)
 
-    print("✅ Все артефакты успешно сгенерированы.")
+    print(" Все артефакты успешно сгенерированы.")
 
 if __name__ == "__main__":
     main()

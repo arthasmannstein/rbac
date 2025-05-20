@@ -44,7 +44,7 @@ def extract_permission_reference(md_path):
 def validate_all():
     errors = []
     warnings = []
-    report_lines = ["# 🧾 Отчёт по валидации ролевой модели\n"]
+    report_lines = ["# Отчёт по валидации ролевой модели\n"]
 
     defined_permissions = set(p.stem for p in PERMISSIONS_DIR.glob("*.md"))
     used_permissions = set()
@@ -93,7 +93,7 @@ def validate_all():
         warnings.append(f"⚠️ Атомарная роль `{r}` не используется ни в одной агрегированной роли.")
 
     # Markdown report
-    report_lines.append("## 📊 Статистика")
+    report_lines.append("## Статистика")
     report_lines += [
         "",
         "| Категория         | Кол-во |",
@@ -107,19 +107,19 @@ def validate_all():
     ]
 
     if errors:
-        report_lines.append("## ❌ Ошибки")
+        report_lines.append("## Ошибки")
         report_lines += [f"- {e}" for e in errors]
     else:
-        report_lines.append("✅ Нет критических ошибок")
+        report_lines.append("Нет критических ошибок")
 
     if warnings:
-        report_lines.append("\n## ⚠️ Предупреждения")
+        report_lines.append("\n## Предупреждения")
         report_lines += [f"- {w}" for w in warnings]
     else:
-        report_lines.append("\n✅ Нет предупреждений")
+        report_lines.append("\nНет предупреждений")
 
     REPORT_PATH.write_text("\n".join(report_lines), encoding="utf-8")
-    print("📝 Сформирован отчёт:", REPORT_PATH)
+    print("Сформирован отчёт:", REPORT_PATH)
 
     if errors:
         sys.exit(1)
