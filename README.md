@@ -83,3 +83,39 @@ MIT
 ## Вопросы или предложения?
 
 Создайте issue или pull request.
+
+
+<pre>
+graph TD
+  dev --> gitlab-write
+  dev --> vault-read
+  dev --> nexus-write
+  qa --> gitlab-read
+  qa --> vault-read
+  qa --> nexus-read
+  qa --> grafana-read
+  ci-admin --> gitlab-admin
+  ci-admin --> nexus-admin
+  vault-access --> vault-read
+  vault-access --> vault-write
+  infra-admin --> ubuntu-admin
+  infra-admin --> centos-admin
+  support --> zabbix-read
+  support --> grafana-read
+  support --> netdata-read
+  readonly --> gitlab-read
+  readonly --> vault-read
+  readonly --> grafana-read
+  readonly --> zabbix-read
+  readonly --> netdata-read
+  readonly --> nexus-read
+  teamlead-dev --> gitlab-write
+  teamlead-dev --> gitlab-admin
+  teamlead-dev --> vault-read
+  teamlead-dev --> vault-write
+  teamlead-dev --> nexus-write
+  teamlead-dev --> grafana-read
+  release-manager --> gitlab-admin
+  release-manager --> vault-read
+  release-manager --> nexus-admin
+  </pre>
