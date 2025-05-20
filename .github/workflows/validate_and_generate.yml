@@ -1,0 +1,58 @@
+name: Validate and Generate Artifacts
+
+on:
+  push:
+    paths:
+      - 'roles/**'
+      - 'permissions/**'
+      - 'scripts/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate-and-generate:
+    runs-on: ubuntu-latest
+    name: Validate model and generate all artifacts
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas pyyaml openpyxl
+
+      - name: Validate model and generate report
+        run: python scripts/validate_role_permissions.py
+
+      - name: Generate role table
+        run: python scripts/gen_roles_table.py
+
+      - name: Generate Mermaid graph
+        run: python scripts/gen_mermaid.py
+
+      - name: Commit validation report and artifacts
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add validation_report.md docs/roles_table.md matrix/roles_table.xlsx export/roles_for_avanpost.yaml diagrams/roles_graph.mmd || true
+          git commit -m "Update validation report and role model artifacts [auto]" || echo "Nothing to commit"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Update validation report and role model artifacts [auto]"
+          title: "chore: auto update validation report and artifacts"
+          body: |
+            Автоматически сгенерирован:
+            - validation_report.md
+            - docs/roles_table.md
+            - matrix/roles_table.xlsx
+            - export/roles_for_avanpost.yaml
+            - diagrams/roles_graph.mmd
+          branch: auto/update-full
