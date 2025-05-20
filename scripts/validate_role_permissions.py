@@ -44,7 +44,7 @@ def extract_permission_reference(md_path):
 def validate_all():
     errors = []
     warnings = []
-    report_lines = ["# Отчёт по валидации ролевой модели\n"]
+    report_lines = ["# 🧾 Отчёт по валидации ролевой модели\n"]
 
     defined_permissions = set(p.stem for p in PERMISSIONS_DIR.glob("*.md"))
     used_permissions = set()
@@ -74,7 +74,6 @@ def validate_all():
             errors.append(f"❌ В атомарной роли `{role_name}` указано несуществующее разрешение `{permission}`.")
 
     # 2. Проверка разрешений
-    atomic_roles_from_perms = set()
     for perm_file in PERMISSIONS_DIR.glob("*.md"):
         perm_name = perm_file.stem
         if perm_name not in used_permissions:
@@ -94,6 +93,19 @@ def validate_all():
         warnings.append(f"⚠️ Атомарная роль `{r}` не используется ни в одной агрегированной роли.")
 
     # Markdown report
+    report_lines.append("## 📊 Статистика")
+    report_lines += [
+        "",
+        "| Категория         | Кол-во |",
+        "|-------------------|--------|",
+        f"| Атомарные роли    | {len(atomic_roles_defined)} |",
+        f"| Агрегаты          | {len(list(AGGREGATED_DIR.glob('*.md')))} |",
+        f"| Разрешения        | {len(defined_permissions)} |",
+        f"| Неисп. роли       | {len(unused_atomic_roles)} |",
+        f"| Неисп. разрешения | {len(defined_permissions - used_permissions)} |",
+        ""
+    ]
+
     if errors:
         report_lines.append("## ❌ Ошибки")
         report_lines += [f"- {e}" for e in errors]
