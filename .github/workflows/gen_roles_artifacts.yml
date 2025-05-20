@@ -37,5 +37,17 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add docs/roles_table.md matrix/roles_table.xlsx export/roles_for_avanpost.yaml diagrams/roles_graph.mmd || true
-          git diff --cached --quiet || git commit -m "🔄 Update role model artifacts [auto]"
-          git push
+          git commit -m "Update role model artifacts [auto]" || echo "Nothing to commit"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Update role model artifacts [auto]"
+          title: "chore: update generated role artifacts"
+          body: |
+            Автоматически сгенерированные артефакты из ролей и разрешений:
+            - Markdown-таблица
+            - Excel-файл
+            - YAML-экспорт
+            - Mermaid-граф
+          branch: auto/update-role-artifacts
