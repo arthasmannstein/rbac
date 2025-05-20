@@ -1,0 +1,68 @@
+roles:
+- name: ci-admin
+  description: ci-admin aggregated role
+  permissions:
+  - gitlab-admin
+  - nexus-admin
+  scope: global
+- name: dev
+  description: dev aggregated role
+  permissions:
+  - gitlab-write
+  - vault-read
+  - nexus-write
+  scope: global
+- name: infra-admin
+  description: infra-admin aggregated role
+  permissions:
+  - ubuntu-admin
+  - centos-admin
+  scope: global
+- name: qa
+  description: qa aggregated role
+  permissions:
+  - gitlab-read
+  - vault-read
+  - nexus-read
+  - grafana-read
+  scope: global
+- name: readonly
+  description: readonly aggregated role
+  permissions:
+  - gitlab-read
+  - vault-read
+  - grafana-read
+  - zabbix-read
+  - netdata-read
+  - nexus-read
+  scope: global
+- name: release-manager
+  description: release-manager aggregated role
+  permissions:
+  - gitlab-admin
+  - vault-read
+  - nexus-admin
+  scope: global
+- name: support
+  description: support aggregated role
+  permissions:
+  - zabbix-read
+  - grafana-read
+  - netdata-read
+  scope: global
+- name: teamlead-dev
+  description: teamlead-dev aggregated role
+  permissions:
+  - gitlab-write
+  - gitlab-admin
+  - vault-read
+  - vault-write
+  - nexus-write
+  - grafana-read
+  scope: global
+- name: vault-access
+  description: vault-access aggregated role
+  permissions:
+  - vault-read
+  - vault-write
+  scope: global
