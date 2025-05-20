@@ -1,0 +1,74 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS thumbnail cache files
+._*
+
+# macOS Spotlight
+.Spotlight-V100
+.Trashes
+
+# macOS volume metadata
+.VolumeIcon.icns
+Icon?
+
+# macOS Finder tags
+.fseventsd
+.com.apple.timemachine.donotpresent
+.com.apple.metadata
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Byte-compiled / backup files
+*.bak
+*.swp
+*.tmp
+
+# Logs and reports
+*.log
+*.out
+
+# Test artifacts
+*.cover
+coverage.xml
+nosetests.xml
+.pytest_cache/
+
+# Compiled files
+*.so
+*.dll
+*.dylib
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# YAML or Excel exports (optional, if you want to regenerate)
+export/
+matrix/*.xlsx
+
+# Node/JS tools (if ever used)
+node_modules/
