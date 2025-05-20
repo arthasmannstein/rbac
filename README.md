@@ -5,28 +5,32 @@
 ##  Структура репозитория
 
 ```text
-roles/
-├── atomic/              # Атомарные роли (одна роль — одно разрешение)
-├── aggregated/          # Агрегированные роли (набор атомарных, назначаются пользователям)
-├── infrastructure/      # Инфраструктурные роли (по системам, без привязки к проектам)
-└── projects/            # Проектные роли (ограничены scope проекта или среды)
-
-permissions/             # Описание атомарных разрешений (например, read:gitlab)
-
-scripts/                 # Скрипты генерации таблиц, графов и валидации
-.github/workflows/       # GitHub Actions для CI/CD
-
-docs/
-└── roles_table.md       # Автоматически сгенерированная таблица ролей (Markdown)
-
-matrix/
-└── roles_table.xlsx     # Таблица ролей в Excel (для удобства ревью)
-
-export/
-└── roles_for_avanpost.yaml   # YAML-экспорт для импорта в Avanpost IDM
-
-diagrams/
-└── roles_graph.mmd      # Mermaid-граф связей ролей
+.
+├── .github/
+│   └── workflows/
+│       └── validate_and_generate.yml       # Единый CI: валидация + генерация + PR
+├── diagrams/
+│   └── roles_graph.mmd                     # Mermaid-граф агрегированных ролей
+├── docs/
+│   └── roles_table.md                      # Markdown-таблица агрегированных ролей
+├── export/
+│   └── roles_for_avanpost.yaml             # YAML-экспорт для IDM (например, Avanpost)
+├── matrix/
+│   └── roles_table.xlsx                    # Excel-матрица ролей и разрешений
+├── permissions/
+│   └── *.md                                # Атомарные разрешения (read:gitlab, write:vault и т.д.)
+├── roles/
+│   ├── atomic/                             # Атомарные роли (vault-read, gitlab-admin и т.д.)
+│   ├── aggregated/                         # Агрегаты (dev, qa, teamlead-dev и др.)
+│   ├── infrastructure/                     # Инфраструктурные роли (ldap-admin, os-access и др.)
+│   └── projects/                           # Проектные роли (project-x-dev, project-y-qa и т.д.)
+├── scripts/
+│   ├── gen_roles_table.py                  # Генерация таблиц, Excel, YAML
+│   ├── gen_mermaid.py                      # Построение Mermaid-графа
+│   └── validate_role_permissions.py        # Валидация модели и генерация отчёта
+├── validation_report.md                    # Отчёт по валидации (генерируется автоматически)
+├── .gitignore                              # Исключение служебных и временных файлов
+└── README.md                               # Основная документация по ролевой модели
 ```
 
 ---
