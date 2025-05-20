@@ -1,0 +1,41 @@
+name: Generate Role Artifacts
+
+on:
+  push:
+    paths:
+      - 'roles/**'
+      - 'permissions/**'
+      - 'scripts/**'
+  workflow_dispatch:
+
+jobs:
+  generate-artifacts:
+    runs-on: ubuntu-latest
+    name: Generate Markdown, Excel, YAML and Mermaid graph
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas pyyaml openpyxl
+
+      - name: Generate role table
+        run: python scripts/gen_roles_table.py
+
+      - name: Generate Mermaid graph
+        run: python scripts/gen_mermaid.py
+
+      - name: Commit generated artifacts
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/roles_table.md matrix/roles_table.xlsx export/roles_for_avanpost.yaml diagrams/roles_graph.mmd || true
+          git diff --cached --quiet || git commit -m "🔄 Update role model artifacts [auto]"
+          git push
