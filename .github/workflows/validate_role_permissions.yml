@@ -12,7 +12,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    name: Check permission references in atomic roles
+    name: Check permission references in atomic roles and create PR
 
     steps:
       - name: Checkout repository
@@ -27,10 +27,19 @@ jobs:
         run: |
           python scripts/validate_role_permissions.py
 
-      - name: Always commit validation report
+      - name: Commit validation report
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add validation_report.md || true
-          git commit -m "🧾 Update validation report [auto]" || echo "No changes to commit"
-          git push || echo "Nothing to push"
+          git commit -m "🧾 Update validation report [auto]" || echo "Nothing to commit"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "🧾 Update validation report [auto]"
+          title: "chore: auto update validation report"
+          body: |
+            Автоматически сгенерированный отчёт по валидации ролей и разрешений.
+            Проверь `validation_report.md` и прими PR, если всё корректно.
+          branch: auto/update-validation-report
