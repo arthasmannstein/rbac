@@ -6,6 +6,7 @@ on:
       - 'roles/**'
       - 'permissions/**'
       - 'scripts/**'
+  pull_request:
   workflow_dispatch:
 
 jobs:
