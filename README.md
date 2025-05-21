@@ -64,8 +64,8 @@ Workflow: `.github/workflows/validate_and_generate.yml`
 
 ##  Как внести изменения
 
-1. Отредактируйте `.md` в `roles/` или `permissions/`
-2. Сделайте `commit` и `push`
+1. Отредактировать `.md` в `roles/` или `permissions/`
+2. Сделать `commit` и `push`
 3. GitHub Actions:
    - проверит модель
    - сгенерирует артефакты
@@ -75,7 +75,7 @@ Workflow: `.github/workflows/validate_and_generate.yml`
 
 ##  Импорт в Avanpost
 
-Экспорт `roles_for_avanpost.yaml` создаётся автоматически. Он может быть адаптирован под вашу IDM-платформу.
+Экспорт `roles_for_avanpost.yaml` создаётся автоматически. Он адаптирован под Avanpost IDM.
 
 ---
 
@@ -108,4 +108,4 @@ Workflow: `.github/workflows/validate_and_generate.yml`
 
 ##  Контакты / поддержка
 
-Для вопросов по модели или интеграции с IDM обращайтесь к владельцам репозитория.
+Для вопросов по модели tg @amquad.
